@@ -67,61 +67,45 @@ body{
 .badge.on{transform:scale(1)}
 
 /* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;background:var(--night);color:var(--cream);
-  padding:74px 0 84px;isolation:isolate}
+.hero{position:relative;overflow:hidden;isolation:isolate;text-align:center;
+  background:var(--night);color:var(--cream);padding:30px 0 26px}
 .hero::before{
   content:"";position:absolute;inset:0;z-index:-2;
   background:
-    radial-gradient(38vw 30vw at 14% 12%,#3b2210 0%,transparent 62%),
-    radial-gradient(32vw 26vw at 88% 8%,#43300c 0%,transparent 62%),
-    radial-gradient(34vw 30vw at 94% 58%,#2a1118 0%,transparent 62%),
-    radial-gradient(34vw 30vw at 4% 66%,#16132a 0%,transparent 62%),
-    radial-gradient(30vw 26vw at 30% 100%,#34190c 0%,transparent 62%);
+    radial-gradient(46% 70% at 12% 0%,#3a2411 0%,transparent 64%),
+    radial-gradient(42% 66% at 88% 4%,#453212 0%,transparent 64%),
+    radial-gradient(60% 80% at 50% 116%,#241226 0%,transparent 62%);
 }
 .hero::after{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(120% 90% at 50% 45%,transparent 40%,rgba(5,5,8,.92) 100%);
+  background:radial-gradient(115% 88% at 50% 40%,transparent 42%,rgba(5,5,8,.86) 100%);
 }
 .fw{position:absolute;color:var(--gold-pale);opacity:0;z-index:-1;
   width:var(--s);height:var(--s);margin:calc(var(--s)/-2);
-  animation:pop 7s var(--d) infinite ease-out}
-.fw0{top:20%;left:16%}.fw1{top:12%;left:78%}.fw2{top:74%;left:84%}
-.fw3{top:80%;left:12%}.fw4{top:34%;left:50%;color:#e8d6b2}
+  animation:pop 8s var(--d) infinite ease-out}
+.fw0{top:14%;left:9%}.fw1{top:9%;left:91%}.fw2{top:78%;left:86%}
+.fw3{top:82%;left:10%}.fw4{top:30%;left:50%;color:#e8d6b2}
 @keyframes pop{
   0%{opacity:0;transform:scale(.25)}
-  8%{opacity:.85}
-  26%{opacity:.5;transform:scale(1)}
+  8%{opacity:.7}
+  26%{opacity:.4;transform:scale(1)}
   48%{opacity:0;transform:scale(1.12)}
   100%{opacity:0;transform:scale(1.12)}
 }
-@media (prefers-reduced-motion:reduce){.fw{animation:none;opacity:.42;transform:scale(1)}}
-.frame{position:absolute;inset:14px;border:1px solid rgba(163,128,58,.55);pointer-events:none}
-.frame::after{content:"";position:absolute;inset:3px;border:1px solid rgba(214,190,134,.2)}
-.card{
-  position:relative;max-width:600px;margin:0 auto;padding:38px 28px 34px;text-align:center;
-  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
-  border-radius:20px;backdrop-filter:blur(14px) saturate(130%);
-  -webkit-backdrop-filter:blur(14px) saturate(130%);
-  box-shadow:0 24px 70px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.28);
-}
-.card::before{
-  content:"";position:absolute;inset:1px 1px auto;height:46%;border-radius:19px 19px 40% 40%;
-  background:linear-gradient(rgba(255,255,255,.13),transparent);pointer-events:none}
-.card .emblem{margin:0 auto;color:var(--gold-pale)}
-.eyebrow{margin:18px 0 0;font-size:10px;letter-spacing:.3em;color:var(--gold-pale);text-transform:uppercase}
-.mark{margin:16px 0 0;font-family:var(--serif);font-weight:600;font-size:clamp(42px,10vw,68px);
-  line-height:1;letter-spacing:.14em;text-indent:.14em;color:#fbf8f2}
-.mark-sub{margin:8px 0 0;font-size:clamp(9px,2.2vw,11px);letter-spacing:.42em;text-indent:.42em;
+@media (prefers-reduced-motion:reduce){.fw{animation:none;opacity:.3;transform:scale(1)}}
+.hero .emblem{margin:0 auto;color:var(--gold-pale)}
+.mark{margin:13px 0 0;font-family:var(--serif);font-weight:600;
+  font-size:clamp(34px,9.5vw,48px);line-height:1;letter-spacing:.16em;text-indent:.16em;
+  color:#fbf8f2}
+.mark-sub{margin:7px 0 0;font-size:9px;letter-spacing:.44em;text-indent:.44em;
   color:var(--gold-lum);text-transform:uppercase}
-.dia{display:flex;align-items:center;justify-content:center;gap:9px;margin:20px 0 0;color:var(--gold-pale)}
-.dia i{display:block;width:52px;height:1px;background:currentColor;opacity:.65}
-.dia b{width:5px;height:5px;background:currentColor;transform:rotate(45deg)}
-.title{margin:14px 0 0;font-family:var(--serif);font-size:26px;letter-spacing:.1em;color:#fbf8f2}
-.edition{margin:8px 0 0;font-size:10px;letter-spacing:.36em;color:var(--gold-lum)}
-.lede{max-width:520px;margin:26px auto 0;font-family:var(--serif);font-size:17px;line-height:1.6;
-  color:rgba(214,190,134,.9);text-align:center}
-.hint{margin:22px 0 0;font-size:10.5px;letter-spacing:.22em;color:rgba(214,190,134,.55);
-  text-transform:uppercase;text-align:center}
+.herorule{width:42px;height:1px;margin:17px auto 0;background:var(--gold);opacity:.85}
+.herometa{margin:15px 0 0;font-family:var(--serif);font-size:16px;line-height:1.45;
+  color:rgba(230,214,184,.92)}
+.herochips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:16px 0 0}
+.herochips span{padding:7px 13px;border-radius:999px;border:1px solid rgba(214,190,134,.26);
+  background:rgba(255,255,255,.04);font-size:9.5px;letter-spacing:.16em;
+  color:rgba(220,199,158,.92);text-transform:uppercase}
 
 /* ---------- chips ---------- */
 .chipbar[hidden]{display:none}
@@ -262,6 +246,10 @@ main.wrap{padding-top:34px;padding-bottom:132px}
 .step button:hover{background:rgba(163,128,58,.12)}
 .step span{min-width:26px;text-align:center;font:500 13px/1 var(--sans);color:var(--ink);
   font-variant-numeric:tabular-nums}
+.step .qin{width:36px;height:26px;padding:0;border:0;border-radius:8px;background:none;
+  text-align:center;font:500 13px/1 var(--sans);color:var(--ink);outline:0;
+  font-variant-numeric:tabular-nums;appearance:none}
+.step .qin:focus{background:rgba(163,128,58,.14)}
 .empty{padding:60px 0;text-align:center;color:var(--mute);font-family:var(--serif);font-size:19px}
 
 /* ---------- sticky total ---------- */
@@ -420,21 +408,14 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
   html{scroll-padding-top:113px}
   .wrap{padding:0 16px}
 
-  /* hero — compact, so products are one swipe away */
-  .hero{padding:34px 0 42px}
-  .frame{inset:10px}
-  .card{padding:26px 18px 24px;border-radius:16px}
-  .card .emblem{width:62px;height:62px}
-  .eyebrow{margin-top:14px;font-size:8.5px;letter-spacing:.22em}
-  .mark{margin-top:12px;font-size:clamp(38px,13vw,54px)}
-  .mark-sub{font-size:9px;letter-spacing:.36em;text-indent:.36em}
-  .dia{margin-top:14px}.dia i{width:38px}
-  .title{margin-top:10px;font-size:21px}
-  .edition{font-size:9px;letter-spacing:.3em}
-  .lede{margin-top:20px;font-size:14.5px;line-height:1.55}
-  .hint{margin-top:14px;font-size:9.5px;letter-spacing:.16em}
-  .fw2,.fw3{display:none}
-  .fw0{top:10%;left:8%}.fw1{top:6%;left:90%}.fw4{top:90%;left:78%}
+  /* hero */
+  .hero{padding:24px 0 22px}
+  .hero .emblem{width:44px;height:44px}
+  .mark{margin-top:11px}
+  .herorule{margin-top:14px}
+  .herometa{margin-top:12px;font-size:14.5px;padding:0 6px}
+  .herochips{margin-top:14px;gap:6px}
+  .herochips span{padding:6px 11px;font-size:9px;letter-spacing:.12em}
 
   /* chrome */
   .topbar-in{height:54px;gap:8px}
@@ -496,6 +477,7 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
   .step button{width:34px;height:34px;font-size:19px}
   .step button:active{background:rgba(163,128,58,.2)}
   .step span{min-width:30px;font-size:14px}
+  .step .qin{width:42px;height:32px;font-size:16px}   /* 16px stops iOS zooming in */
 
   /* bottom bar */
   .bar-in{padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));gap:10px}
@@ -550,20 +532,15 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
 
 <section class="hero" id="hero">
   <div class="fw fw0" style="--d:0s;--s:190px"><svg viewBox="0 0 100 100" width="190" height="190" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="1" stroke-linecap="round"><path d="M56.23 49.63L96.29 47.21 M55.89 47.95L72.73 42.08 M54.77 45.98L83.65 21.65 M52.85 44.45L61.14 28.28 M51.11 43.86L58.03 5.52 M48.48 43.95L43.69 24.82 M47.09 44.48L28.37 9.00 M45.14 46.09L31.30 34.95 M44.00 48.29L3.95 36.88 M43.77 50.34L21.03 51.57 M44.07 51.94L6.10 64.35 M45.51 54.33L30.33 68.98 M46.85 55.39L28.85 86.23 M48.85 56.13L45.05 76.31 M51.52 56.05L61.66 96.33 M53.10 55.42L64.26 74.93 M54.61 54.21L84.48 81.48 M55.88 52.08L70.91 57.41" fill="none"/><circle cx="101.8" cy="46.9" r="1.1"/><circle cx="87.7" cy="18.2" r="1.1"/><circle cx="59.0" cy="0.2" r="1.1"/><circle cx="25.8" cy="4.1" r="1.1"/><circle cx="-1.6" cy="35.3" r="1.1"/><circle cx="0.8" cy="66.1" r="1.1"/><circle cx="26.3" cy="90.6" r="1.1"/><circle cx="63.1" cy="101.9" r="1.1"/><circle cx="88.6" cy="85.3" r="1.1"/><circle cx="50" cy="50" r="2"/></g></svg></div><div class="fw fw1" style="--d:1.7s;--s:130px"><svg viewBox="0 0 100 100" width="130" height="130" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="1" stroke-linecap="round"><path d="M56.23 50.40L96.88 53.00 M55.76 47.60L72.19 40.75 M54.78 45.99L83.96 21.55 M52.98 44.52L63.42 25.27 M51.52 43.95L60.08 9.77 M48.56 43.93L44.13 25.28 M46.64 44.74L27.74 15.22 M45.26 45.94L29.01 32.04 M44.24 47.59L6.06 31.61 M43.78 50.44L27.74 51.56 M43.98 51.64L6.66 61.82 M45.54 54.37L32.13 67.49 M46.62 55.24L26.08 87.07 M48.42 56.04L43.96 73.00 M51.02 56.16L57.27 94.02 M52.86 55.54L60.95 71.19 M54.58 54.24L82.55 80.15 M55.78 52.35L70.61 58.37" fill="none"/><circle cx="102.5" cy="53.4" r="1.1"/><circle cx="88.0" cy="18.1" r="1.1"/><circle cx="61.3" cy="4.9" r="1.1"/><circle cx="25.1" cy="11.0" r="1.1"/><circle cx="0.8" cy="29.4" r="1.1"/><circle cx="1.5" cy="63.2" r="1.1"/><circle cx="23.2" cy="91.5" r="1.1"/><circle cx="58.1" cy="99.3" r="1.1"/><circle cx="86.5" cy="83.8" r="1.1"/><circle cx="50" cy="50" r="2"/></g></svg></div><div class="fw fw2" style="--d:3.1s;--s:150px"><svg viewBox="0 0 100 100" width="150" height="150" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="1" stroke-linecap="round"><path d="M56.22 49.50L97.50 46.21 M56.01 48.33L71.90 43.90 M54.54 45.72L83.61 18.27 M52.96 44.51L61.59 28.48 M50.97 43.84L57.05 5.19 M48.83 43.87L45.63 27.12 M46.95 44.56L28.50 11.70 M45.07 46.18L26.51 31.80 M43.99 48.33L6.70 37.99 M43.76 49.94L25.86 49.77 M43.98 51.65L10.02 60.98 M45.20 53.98L31.12 65.65 M46.77 55.34L25.51 90.44 M48.94 56.15L45.54 76.00 M50.80 56.19L55.31 91.10 M52.95 55.50L60.95 70.37 M54.79 54.00L86.82 80.78 M55.93 51.95L72.29 57.35" fill="none"/><circle cx="103.2" cy="45.8" r="1.1"/><circle cx="87.6" cy="14.5" r="1.1"/><circle cx="57.9" cy="-0.2" r="1.1"/><circle cx="25.9" cy="7.1" r="1.1"/><circle cx="1.5" cy="36.5" r="1.1"/><circle cx="5.2" cy="62.3" r="1.1"/><circle cx="22.6" cy="95.3" r="1.1"/><circle cx="55.9" cy="96.0" r="1.1"/><circle cx="91.2" cy="84.5" r="1.1"/><circle cx="50" cy="50" r="2"/></g></svg></div><div class="fw fw3" style="--d:4.4s;--s:105px"><svg viewBox="0 0 100 100" width="105" height="105" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="1" stroke-linecap="round"><path d="M56.23 50.29L94.89 52.05 M55.91 48.00L75.31 41.43 M54.69 45.89L81.36 22.49 M53.57 44.88L66.30 26.61 M51.34 43.91L59.21 8.15 M48.39 43.97L43.37 25.18 M46.57 44.79L25.54 12.85 M45.12 46.11L31.84 35.50 M44.09 48.00L5.36 34.93 M43.76 50.03L22.23 50.11 M44.20 52.31L11.25 65.43 M45.41 54.22L30.40 68.01 M46.69 55.29L28.02 85.19 M49.31 56.20L47.16 75.55 M51.32 56.10L59.96 96.12 M53.32 55.28L65.51 74.69 M54.71 54.10L85.19 80.64 M55.84 52.19L77.40 60.27" fill="none"/><circle cx="100.3" cy="52.3" r="1.1"/><circle cx="85.1" cy="19.2" r="1.1"/><circle cx="60.3" cy="3.1" r="1.1"/><circle cx="22.6" cy="8.4" r="1.1"/><circle cx="0.0" cy="33.1" r="1.1"/><circle cx="6.6" cy="67.3" r="1.1"/><circle cx="25.4" cy="89.4" r="1.1"/><circle cx="61.2" cy="101.7" r="1.1"/><circle cx="89.4" cy="84.3" r="1.1"/><circle cx="50" cy="50" r="2"/></g></svg></div><div class="fw fw4" style="--d:2.4s;--s:90px"><svg viewBox="0 0 100 100" width="90" height="90" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="1" stroke-linecap="round"><path d="M56.23 50.29L91.93 51.93 M55.90 47.97L72.01 42.44 M55.07 46.36L85.73 24.36 M52.72 44.38L62.29 24.59 M50.80 43.81L55.47 7.58 M48.88 43.86L45.64 26.19 M47.19 44.43L31.11 12.49 M45.43 45.76L28.59 30.14 M44.02 48.21L5.27 36.57 M43.77 50.33L26.47 51.24 M44.07 51.94L6.76 64.13 M45.39 54.20L28.82 69.28 M47.25 55.60L31.52 87.56 M49.03 56.16L45.77 76.91 M51.09 56.14L57.42 91.82 M53.10 55.42L61.29 69.77 M55.07 53.64L88.27 77.45 M55.88 52.09L72.98 58.15" fill="none"/><circle cx="97.0" cy="52.2" r="1.1"/><circle cx="90.0" cy="21.3" r="1.1"/><circle cx="56.1" cy="2.5" r="1.1"/><circle cx="28.8" cy="8.0" r="1.1"/><circle cx="-0.1" cy="35.0" r="1.1"/><circle cx="1.6" cy="65.8" r="1.1"/><circle cx="29.3" cy="92.1" r="1.1"/><circle cx="58.3" cy="96.8" r="1.1"/><circle cx="92.9" cy="80.7" r="1.1"/><circle cx="50" cy="50" r="2"/></g></svg></div>
-  <div class="frame"></div>
   <div class="wrap">
-    <div class="card">
-      <svg class="emblem" viewBox="0 0 100 100" width="84" height="84" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><circle cx="50" cy="50" r="46.0" stroke-width="3.4"/><circle cx="50" cy="50" r="39.3" stroke-width="1.5"/><path d="M59.20 50.00L80.36 50.00 M56.51 43.49L71.47 28.53 M50.00 40.80L50.00 19.64 M43.49 43.49L28.53 28.53 M40.80 50.00L19.64 50.00 M43.49 56.51L28.53 71.47 M50.00 59.20L50.00 80.36 M56.51 56.51L71.47 71.47" stroke-width="2.5"/><path d="M60.20 45.78L71.25 41.20 M54.22 39.80L58.80 28.75 M45.78 39.80L41.20 28.75 M39.80 45.78L28.75 41.20 M39.80 54.22L28.75 58.80 M45.78 60.20L41.20 71.25 M54.22 60.20L58.80 71.25 M60.20 54.22L71.25 58.80" stroke-width="1.4"/><circle cx="50" cy="50" r="4.4" fill="currentColor" stroke="none"/></svg>
-      <p class="eyebrow">Fireworks · Sparklers · Celebration</p>
-      <h1 class="mark">BLAST</h1>
-      <p class="mark-sub">Crackers</p>
-      <div class="dia"><i></i><b></b><i></i></div>
-      <p class="title">Price List</p>
-      <p class="edition">2026 EDITION</p>
+    <svg class="emblem" viewBox="0 0 100 100" width="52" height="52" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><circle cx="50" cy="50" r="46.0" stroke-width="3.4"/><circle cx="50" cy="50" r="39.3" stroke-width="1.5"/><path d="M59.20 50.00L80.36 50.00 M56.51 43.49L71.47 28.53 M50.00 40.80L50.00 19.64 M43.49 43.49L28.53 28.53 M40.80 50.00L19.64 50.00 M43.49 56.51L28.53 71.47 M50.00 59.20L50.00 80.36 M56.51 56.51L71.47 71.47" stroke-width="2.5"/><path d="M60.20 45.78L71.25 41.20 M54.22 39.80L58.80 28.75 M45.78 39.80L41.20 28.75 M39.80 45.78L28.75 41.20 M39.80 54.22L28.75 58.80 M45.78 60.20L41.20 71.25 M54.22 60.20L58.80 71.25 M60.20 54.22L71.25 58.80" stroke-width="1.4"/><circle cx="50" cy="50" r="4.4" fill="currentColor" stroke="none"/></svg>
+    <h1 class="mark">BLAST</h1>
+    <p class="mark-sub">Crackers</p>
+    <div class="herorule"></div>
+    <p class="herometa">The 2026 price list — pick what you want, send the order on WhatsApp.</p>
+    <div class="herochips">
+      <span>92 items</span><span>18 categories</span><span>From ₹21</span>
     </div>
-    <p class="lede">Ninety-two selections across sound, light and colour — single sounds,
-      aerial shots, fountains, wheels and sparklers.</p>
-    <p class="hint">Tap add · build your order · send it on WhatsApp</p>
   </div>
 </section>
 
@@ -690,7 +667,8 @@ function paint(id){
   const row = cell.closest(".row");
   cell.innerHTML = n
     ? `<span class="step"><button data-d="-1" aria-label="Less">−</button>
-         <span>${n}</span><button data-d="1" aria-label="More">+</button></span>`
+         <input class="qin" type="text" inputmode="numeric" pattern="[0-9]*" value="${n}"
+                aria-label="Quantity"><button data-d="1" aria-label="More">+</button></span>`
     : `<button class="add">Add</button>`;
   row.classList.toggle("on", !!n);
 }
@@ -728,19 +706,51 @@ function total(){
     : "Nothing added yet.";
 }
 function renderCart(){
+  const box = $("#citems");
+  if (box.contains(document.activeElement)) return;   // someone is typing in here
   const ids = Object.keys(cart).sort((a,b)=>a-b);
-  $("#citems").innerHTML = ids.length ? ids.map(id => {
+  box.innerHTML = ids.length ? ids.map(id => {
     const it = ITEMS[id], n = cart[id];
     return `<div class="citem" data-id="${id}">
       <div class="cn">${esc(it.n)}</div>
       <div class="cm">${esc(it.u)} · ${money(it.r)} each</div>
       <div class="cl">${money(it.r * n)}</div>
       <div class="cs"><span class="step">
-        <button data-d="-1" aria-label="Less">−</button><span>${n}</span>
+        <button data-d="-1" aria-label="Less">−</button>
+        <input class="qin" type="text" inputmode="numeric" pattern="[0-9]*" value="${n}"
+               aria-label="Quantity">
         <button data-d="1" aria-label="More">+</button></span></div>
     </div>`;
   }).join("") : "";
 }
+
+function quietQty(id, n){
+  n = Math.max(0, Math.min(999, n));
+  if (n) cart[id] = n; else delete cart[id];
+  save(LS.cart, cart);
+  total();
+  renderCart();
+}
+document.addEventListener("input", e => {
+  const inp = e.target.closest(".qin");
+  if (!inp) return;
+  const digits = inp.value.replace(/[^0-9]/g, "").slice(0, 3);
+  if (digits !== inp.value) inp.value = digits;
+  const host = inp.closest("[data-id]");
+  if (host) quietQty(host.dataset.id, parseInt(digits || "0", 10));
+});
+/* on the way out, tidy the field up (empty means one, not zero) */
+document.addEventListener("focusout", e => {
+  const inp = e.target.closest && e.target.closest(".qin");
+  if (!inp) return;
+  const host = inp.closest("[data-id]");
+  if (!host) return;
+  const id = host.dataset.id;
+  setQty(id, qty(id) || 1);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.closest && e.target.closest(".qin")) e.target.blur();
+});
 
 document.addEventListener("click", e => {
   const add = e.target.closest(".add");
