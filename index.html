@@ -269,7 +269,7 @@ body.sheet-open .bar{transform:translateY(120%)}
 .btn-pdf{background:rgba(31,168,85,.1);border-color:rgba(31,168,85,.5);color:#12813f}
 .btn-pdf:hover{background:rgba(31,168,85,.18)}
 .btn-pdf[disabled]{opacity:.6}
-.sendnote{margin:-2px 0 2px;text-align:center;font-size:11px;line-height:1.5;color:var(--mute)}
+.sendnote{margin:-3px 0 3px;text-align:center;font-size:11px;line-height:1.45;color:var(--mute)}
 .btn-ghost{background:var(--glass);border-color:var(--hair);color:var(--ink)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .btn svg{width:17px;height:17px;flex:0 0 auto}
@@ -1070,9 +1070,10 @@ function renderBill(){
       </p>
     </div>
     <div class="bacts">
-      <a class="btn btn-wa" id="billsend" href="#" rel="noopener">Send on WhatsApp — text</a>
-      <button class="btn btn-pdf" id="billpdf">Send as PDF</button>
-      <p class="sendnote">The PDF opens your share sheet — choose WhatsApp.</p>
+      <a class="btn btn-wa" id="billsend" href="#" rel="noopener">Send order on WhatsApp</a>
+      <p class="sendnote">Goes straight to the shop with every item, the total and your details.</p>
+      <button class="btn btn-pdf" id="billpdf">Also share a PDF copy</button>
+      <p class="sendnote">Opens your share sheet — pick WhatsApp, then the shop.</p>
       <div class="pair">
         <button class="btn btn-ghost" id="billedit">Change quantities</button>
         <button class="btn btn-ghost" id="billcopy">Copy text</button>
