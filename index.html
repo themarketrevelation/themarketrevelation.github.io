@@ -534,11 +534,6 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
              autocorrect="off" autocapitalize="none" spellcheck="false" aria-label="Search items">
       <button class="clearq" id="clearq" type="button" hidden aria-label="Clear search">&times;</button>
     </div>
-    <button class="iconbtn" id="gear" title="Shop settings" aria-label="Shop settings">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="3.2"/>
-        <path d="M12 2.6v3M12 18.4v3M21.4 12h-3M5.6 12h-3M18.6 5.4l-2.1 2.1M7.5 16.5l-2.1 2.1M18.6 18.6l-2.1-2.1M7.5 7.5 5.4 5.4"/></svg>
-    </button>
     <button class="iconbtn cartbtn" id="opencart" aria-label="Open order">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M4 5h2.2l2.2 10.2h9.3L20 8H7"/><circle cx="9.4" cy="19" r="1.5"/><circle cx="17.6" cy="19" r="1.5"/></svg>
@@ -650,20 +645,6 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
   </div>
 </aside>
 
-<div class="modal" id="modal"><div class="modal-in">
-  <h3>Shop settings</h3>
-  <p>Enter the WhatsApp number that should receive orders. Include the country code,
-     digits only — for India, start with 91.</p>
-  <div class="fields">
-    <div><label for="wa">WhatsApp number</label><input id="wa" inputmode="tel" placeholder="919876543210"></div>
-    <div><label for="shop">Shop name</label><input id="shop" placeholder="Blast Crackers"></div>
-  </div>
-  <div style="display:grid;gap:9px;margin-top:16px">
-    <button class="btn btn-wa" id="saveset">Save</button>
-    <button class="btn btn-ghost" id="closeset">Cancel</button>
-  </div>
-</div></div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -673,11 +654,10 @@ const YEAR = "2026";
 const EMBLEM_BILL = "<svg class=\"emblem\" viewBox=\"0 0 100 100\" width=\"46\" height=\"46\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"46.0\" stroke-width=\"3.4\"/><circle cx=\"50\" cy=\"50\" r=\"39.3\" stroke-width=\"1.5\"/><path d=\"M59.20 50.00L80.36 50.00 M56.51 43.49L71.47 28.53 M50.00 40.80L50.00 19.64 M43.49 43.49L28.53 28.53 M40.80 50.00L19.64 50.00 M43.49 56.51L28.53 71.47 M50.00 59.20L50.00 80.36 M56.51 56.51L71.47 71.47\" stroke-width=\"2.5\"/><path d=\"M60.20 45.78L71.25 41.20 M54.22 39.80L58.80 28.75 M45.78 39.80L41.20 28.75 M39.80 45.78L28.75 41.20 M39.80 54.22L28.75 58.80 M45.78 60.20L41.20 71.25 M54.22 60.20L58.80 71.25 M60.20 54.22L71.25 58.80\" stroke-width=\"1.4\"/><circle cx=\"50\" cy=\"50\" r=\"4.4\" fill=\"currentColor\" stroke=\"none\"/></svg>";
 
 /* Orders are sent here. Digits only, country code first.
-   Change WHATSAPP below and every visitor picks up the new number
-   automatically — a number saved in a browser is dropped when this one changes. */
-const CONFIG = { WHATSAPP: "917904653958", SHOP: "Blast Crackers" };
+   This is the only place the number lives — visitors cannot change it. */
+const SHOP = { wa: "917904653958", name: "Blast Crackers" };
 
-const LS = { cart:"bc_cart", who:"bc_who", cfg:"bc_cfg" };
+const LS = { cart:"bc_cart", who:"bc_who" };
 const $  = s => document.querySelector(s);
 const money = n => "₹" + n.toLocaleString("en-IN");
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -688,13 +668,6 @@ DATA.forEach(sec => sec.items.forEach(it => ITEMS[it.i] = {...it, cat:sec.t}));
 
 let cart = load(LS.cart, {});
 let who  = load(LS.who, {});
-let cfg  = (() => {
-  const saved = load(LS.cfg, {});
-  // a local override only survives while it was made against this build's number
-  const keep = saved.base === CONFIG.WHATSAPP ? saved : {};
-  return Object.assign({wa: CONFIG.WHATSAPP, shop: CONFIG.SHOP}, keep);
-})();
-
 function load(k, d){
   try {
     const v = JSON.parse(localStorage.getItem(k));
@@ -854,13 +827,13 @@ function closeCart(fromPop){
   $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); scrollLock(false);
   try { if (fromPop !== true && history.state && history.state.sheet) history.back(); } catch (e) {}
 }
-addEventListener("popstate", () => { if (cartOpen()) closeCart(true); closeSet(); });
+addEventListener("popstate", () => { if (cartOpen()) closeCart(true); });
 $("#opencart").onclick = () => openCart();
 $("#viewbill").onclick = () => closeCart();
 $("#review").onclick = () => openCart();
 $("#barsum").onclick = () => openCart();
 $("#closecart").onclick = () => closeCart();
-$("#scrim").onclick = () => { if (cartOpen()) closeCart(); closeSet(); };
+$("#scrim").onclick = () => { if (cartOpen()) closeCart(); };
 $("#clear").onclick = () => {
   if (!Object.keys(cart).length) return;
   if (!confirm("Clear the whole order?")) return;
@@ -869,19 +842,8 @@ $("#clear").onclick = () => {
   total(); renderCart(); toast("Order cleared");
 };
 
-const openSet = () => { $("#wa").value = cfg.wa || ""; $("#shop").value = cfg.shop || "";
-  $("#modal").classList.add("on"); $("#scrim").classList.add("on"); $("#wa").focus(); };
-const closeSet = () => { $("#modal").classList.remove("on"); $("#scrim").classList.remove("on"); };
-$("#gear").onclick = openSet;
-$("#closeset").onclick = closeSet;
-$("#saveset").onclick = () => {
-  cfg.wa = ($("#wa").value.match(/\d+/g) || []).join("");
-  cfg.shop = $("#shop").value.trim() || "Blast Crackers";
-  cfg.base = CONFIG.WHATSAPP;
-  save(LS.cfg, cfg); paintWa(); syncSend(); closeSet(); toast("Settings saved");
-};
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape"){ if (cartOpen()) closeCart(); closeSet(); }
+  if (e.key === "Escape" && cartOpen()) closeCart();
 });
 
 /* swipe the sheet down to dismiss */
@@ -1008,7 +970,7 @@ function renderBill(){
         </div>
         <div class="btovia">
           <h3>Order via</h3>
-          <div class="val">WhatsApp<br>${prettyWa(cfg.wa)}</div>
+          <div class="val">WhatsApp<br>${prettyWa(SHOP.wa)}</div>
         </div>
       </div>
       <div class="bcols"><span>#</span><span>Particulars</span><span>Amount</span></div>
@@ -1052,7 +1014,7 @@ function renderBill(){
 function orderText(){
   const ids = Object.keys(cart).sort((a,b)=>a-b), t = totals();
   const L = [];
-  L.push(`*${(cfg.shop || "Blast Crackers").toUpperCase()} — ORDER*`);
+  L.push(`*${(SHOP.name || "Blast Crackers").toUpperCase()} — ORDER*`);
   L.push(`_Estimate ${billNo()} · ${billDate()}_`, "");
   ids.forEach((id, k) => {
     const it = ITEMS[id], n = cart[id];
@@ -1077,14 +1039,14 @@ function orderText(){
    changes: a plain link hands off to the WhatsApp app far more reliably than
    window.open, which phones and embedded frames often block. */
 function syncSend(){
-  const ready = Object.keys(cart).length && cfg.wa;
-  const href = ready ? `https://wa.me/${cfg.wa}?text=${encodeURIComponent(orderText())}` : "#";
+  const ready = Object.keys(cart).length && SHOP.wa;
+  const href = ready ? `https://wa.me/${SHOP.wa}?text=${encodeURIComponent(orderText())}` : "#";
   [$("#send2"), $("#billsend"), $("#placebtn"), $("#tobill")]
     .forEach(a => { if (a) a.href = href; });
 }
 function guardSend(e){
   if (!Object.keys(cart).length){ e.preventDefault(); toast("Add something first"); return; }
-  if (!cfg.wa){ e.preventDefault(); openSet(); toast("Add the shop's WhatsApp number"); }
+  if (!SHOP.wa){ e.preventDefault(); toast("Ordering is unavailable right now"); }
 }
 $("#tobill").addEventListener("click", guardSend);
 $("#placebtn").addEventListener("click", guardSend);
@@ -1112,9 +1074,9 @@ function prettyWa(d){
 function paintWa(){
   const a = $("#fwa");
   if (!a) return;
-  if (cfg.wa){
-    a.href = `https://wa.me/${cfg.wa}`;
-    a.querySelector("span").textContent = `Order on WhatsApp · ${prettyWa(cfg.wa)}`;
+  if (SHOP.wa){
+    a.href = `https://wa.me/${SHOP.wa}`;
+    a.querySelector("span").textContent = `Order on WhatsApp · ${prettyWa(SHOP.wa)}`;
     a.parentElement.style.display = "";
   } else a.parentElement.style.display = "none";
 }
