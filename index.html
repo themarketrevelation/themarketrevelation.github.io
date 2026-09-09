@@ -321,42 +321,50 @@ body.sheet-open .bar{transform:translateY(120%)}
 .bhead .who{flex:1 1 auto;min-width:0}
 .bhead h2{margin:0;font-family:var(--serif);font-weight:600;font-size:25px;letter-spacing:.13em;color:var(--ink)}
 .bhead .sub{margin:3px 0 0;font-size:8.5px;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
-.bhead .kind{margin:9px 0 0;font-size:10px;letter-spacing:.24em;color:var(--mute);text-transform:uppercase}
-.bmeta{flex:0 0 auto;text-align:right;font-size:10.5px;line-height:1.7;color:var(--mute)}
-.bmeta b{display:block;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.04em}
-.bto{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--hair)}
+.bmeta{flex:0 0 auto;text-align:right;font-size:10.5px;line-height:1.6;color:var(--mute)}
+.bmeta .kind{display:block;margin-bottom:3px;font-size:8.5px;letter-spacing:.24em;
+  color:var(--gold);text-transform:uppercase}
+.bmeta b{display:block;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;
+  letter-spacing:.03em;font-size:11px}
+.bto{display:block;padding:15px 0 16px;border-bottom:1px solid var(--hair)}
 .bto h3{margin:0 0 6px;font:400 9px/1 var(--sans);letter-spacing:.24em;color:var(--mute);text-transform:uppercase}
 .bto .val{font-size:13.5px;line-height:1.6;color:var(--ink)}
 .bto .val .miss{color:var(--mute);font-style:italic}
-.btofields{flex:1 1 auto;min-width:0;display:grid;gap:7px}
-.btofields input,.btofields textarea{width:100%;padding:8px 0;border:0;border-bottom:1px solid var(--hair);
-  background:0;font:400 14px/1.4 var(--sans);color:var(--ink);outline:0;resize:vertical}
-.btofields input::placeholder,.btofields textarea::placeholder{color:var(--mute);font-style:italic}
-.btofields input:focus,.btofields textarea:focus{border-bottom-color:var(--gold)}
-.btovia{flex:0 0 auto}
+.btofields{display:grid;gap:8px}
+.btofields input,.btofields textarea{width:100%;padding:10px 12px;border-radius:9px;
+  border:1px solid var(--hair);background:#fdfcfa;font:400 14px/1.4 var(--sans);
+  color:var(--ink);outline:0;resize:none}
+.btofields input::placeholder,.btofields textarea::placeholder{color:var(--mute)}
+.btofields input:focus,.btofields textarea:focus{border-color:var(--gold-pale);
+  background:#fff;box-shadow:0 0 0 3px rgba(214,190,134,.18)}
+.btovia{margin:13px 0 0;font-size:10.5px;letter-spacing:.06em;color:var(--mute)}
 .bcols{display:grid;grid-template-columns:22px 1fr 92px;gap:10px;padding:11px 0 8px;
   border-bottom:1px solid var(--hair);font:400 8.5px/1 var(--sans);letter-spacing:.2em;
   color:var(--mute);text-transform:uppercase}
 .bcols span:last-child{text-align:right}
-.bline{display:grid;grid-template-columns:22px 1fr auto;gap:5px 10px;padding:11px 0;
+.bline{display:grid;grid-template-columns:20px 1fr auto;gap:3px 10px;padding:10px 0;
   border-bottom:1px solid var(--rule);align-items:center}
-.bline .bno{grid-column:1;grid-row:1}
+.bline .bno{grid-column:1;grid-row:1;align-self:start;padding-top:2px}
 .bline .bnm{grid-column:2;grid-row:1}
 .bline .bamt{grid-column:3;grid-row:1}
-.bqty{grid-column:2 / span 2;grid-row:2;justify-self:end}
+.bqty{grid-column:2 / span 2;grid-row:2;display:flex;align-items:center;justify-content:flex-end}
 .bqty .pq{display:none;font-size:12px;color:var(--mute)}
+.bqty .step{height:30px}
+.bqty .step button{width:28px;height:26px;font-size:16px}
+.bqty .step .qin{width:34px;height:24px;font-size:13px}
 .bno{font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums}
 .bnm{font-size:13.5px;color:var(--ink-soft)}
-.bnm em{display:block;margin-top:3px;font-style:normal;font-size:10.5px;letter-spacing:.1em;
+.bnm em{display:block;margin-top:2px;font-style:normal;font-size:10px;letter-spacing:.08em;
   color:var(--mute);text-transform:uppercase}
 .bamt{text-align:right;font-weight:500;font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
-.bsum{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:15px 0 0}
+.bsum{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  margin:14px 0 0;padding:14px 16px;border-radius:12px;background:#faf7f1}
 .bsum .cnt{font-size:10.5px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
 .bsum .grand{text-align:right}
 .bsum .grand span{display:block;font-size:9px;letter-spacing:.24em;color:var(--mute);text-transform:uppercase}
 .bsum .grand b{font:500 27px/1.1 var(--sans);color:var(--ink);font-variant-numeric:tabular-nums}
-.bwords{margin:12px 0 0;padding:11px 13px;border-radius:10px;background:rgba(201,169,97,.11);
-  font-family:var(--serif);font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+.bwords{margin:10px 0 0;padding:0 2px;font-family:var(--serif);font-size:13.5px;
+  line-height:1.5;color:var(--mute)}
 .bterms{margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--hair);
   font-size:10.5px;line-height:1.75;color:var(--mute)}
 .bacts{display:grid;gap:9px;margin:18px 0 0}
@@ -1017,9 +1025,9 @@ function renderBill(){
         <div class="who">
           <h2>BLAST</h2>
           <p class="sub">Crackers</p>
-          <p class="kind">Estimate</p>
         </div>
         <div class="bmeta">
+          <span class="kind">Estimate</span>
           <b>${billNo()}</b>
           ${billDate()}
         </div>
@@ -1034,10 +1042,7 @@ function renderBill(){
                     autocomplete="street-address">${esc(who.caddr || "")}</textarea>
           <input id="bnote" placeholder="Note (optional)" value="${esc(who.cnote || "")}">
         </div>
-        <div class="btovia">
-          <h3>Order via</h3>
-          <div class="val">WhatsApp<br>${prettyWa(SHOP.wa)}</div>
-        </div>
+        <p class="btovia">Order via WhatsApp · ${prettyWa(SHOP.wa)}</p>
       </div>
       <div class="bcols"><span>#</span><span>Particulars</span><span>Amount</span></div>
       ${ids.map((id, k) => {
@@ -1085,8 +1090,9 @@ function renderBill(){
 }
 
 /* ---------- share the bill as a PDF ----------
-   A wa.me link can only carry text, so a file has to go through the share
-   sheet. Where that isn't available the PDF is saved instead. */
+   Drawn as real text rather than a screenshot: crisp at any zoom, a few KB,
+   and it survives phones where canvas capture misbehaves. A wa.me link cannot
+   carry a file, so the finished PDF goes out through the share sheet. */
 const scripts = {};
 function loadScript(src){
   if (scripts[src]) return scripts[src];
@@ -1096,43 +1102,130 @@ function loadScript(src){
     document.head.appendChild(el);
   });
 }
+
+function buildPdf(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit: "pt", format: "a4"});
+  const W = doc.internal.pageSize.getWidth();
+  const H = doc.internal.pageSize.getHeight();
+  const M = 46;
+  /* the PDF core fonts have no rupee glyph, so spell it */
+  const rs = n => "Rs. " + n.toLocaleString("en-IN");
+  const grey = v => doc.setTextColor(v, v, v);
+  let y = M + 6;
+
+  doc.setFont("times", "bold"); doc.setFontSize(23); grey(24);
+  doc.text("BLAST", M, y);
+  doc.setFont("helvetica", "normal"); doc.setFontSize(7.5);
+  doc.setTextColor(163, 128, 58);
+  doc.text("C R A C K E R S", M + 2, y + 14);
+  doc.setFontSize(8); grey(130);
+  doc.text("E S T I M A T E", M + 2, y + 30);
+
+  doc.setFont("helvetica", "bold"); doc.setFontSize(10.5); grey(24);
+  doc.text(billNo(), W - M, y, {align: "right"});
+  doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); grey(120);
+  doc.text(billDate(), W - M, y + 15, {align: "right"});
+
+  y += 44;
+  doc.setDrawColor(24); doc.setLineWidth(1.3); doc.line(M, y, W - M, y);
+  y += 22;
+
+  doc.setFontSize(7.5); grey(140); doc.text("BILL TO", M, y);
+  doc.text("ORDER VIA", W - M, y, {align: "right"});
+  doc.setFontSize(10.5); grey(30);
+  doc.text("WhatsApp " + prettyWa(SHOP.wa), W - M, y + 16, {align: "right"});
+
+  let by = y + 16;
+  const detail = [who.cname, who.cphone, who.caddr].filter(Boolean);
+  if (!detail.length){ grey(160); doc.text("Not provided", M, by); by += 15; grey(30); }
+  detail.forEach(line => {
+    doc.splitTextToSize(String(line), 280).forEach(part => { doc.text(part, M, by); by += 15; });
+  });
+  if (who.cnote){
+    grey(120); doc.setFontSize(9.5);
+    doc.splitTextToSize("Note: " + who.cnote, 280).forEach(p => { doc.text(p, M, by); by += 13; });
+  }
+  y = Math.max(by, y + 34) + 16;
+
+  const COL = {qty: W - M - 156, rate: W - M - 86, amt: W - M};
+  const head = () => {
+    doc.setDrawColor(205); doc.setLineWidth(.7); doc.line(M, y, W - M, y); y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); grey(140);
+    doc.text("#", M, y); doc.text("PARTICULARS", M + 20, y);
+    doc.text("QTY", COL.qty, y, {align: "right"});
+    doc.text("RATE", COL.rate, y, {align: "right"});
+    doc.text("AMOUNT", COL.amt, y, {align: "right"});
+    y += 9; doc.line(M, y, W - M, y); y += 18;
+  };
+  head();
+
+  const ids = Object.keys(cart).sort((a, b) => a - b);
+  ids.forEach((id, i) => {
+    if (y > H - 190){ doc.addPage(); y = M + 10; head(); }
+    const it = ITEMS[id], n = cart[id];
+    doc.setFontSize(10); grey(35);
+    doc.text(String(i + 1), M, y);
+    const nameLines = doc.splitTextToSize(it.n, 200);
+    doc.text(nameLines, M + 20, y);
+    doc.setFontSize(10); grey(35);
+    doc.text(String(n), COL.qty, y, {align: "right"});
+    doc.text(rs(it.r), COL.rate, y, {align: "right"});
+    doc.setFont("helvetica", "bold");
+    doc.text(rs(it.r * n), COL.amt, y, {align: "right"});
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8); grey(145);
+    doc.text(it.u, M + 20, y + nameLines.length * 11 + 2);
+    y += nameLines.length * 11 + 20;
+    doc.setDrawColor(234); doc.setLineWidth(.5); doc.line(M, y - 10, W - M, y - 10);
+  });
+
+  const t = totals();
+  y += 6;
+  doc.setFontSize(8.5); grey(140);
+  doc.text(`${t.items} item${t.items !== 1 ? "s" : ""}  ·  ${t.units} qty`, M, y + 4);
+  doc.setFontSize(8.5); doc.text("TOTAL", COL.amt - 96, y + 4, {align: "right"});
+  doc.setFont("helvetica", "bold"); doc.setFontSize(17); grey(24);
+  doc.text(rs(t.sum), COL.amt, y + 8, {align: "right"});
+  doc.setFont("helvetica", "normal");
+  y += 30;
+
+  doc.setFillColor(250, 246, 238); doc.rect(M, y, W - M * 2, 26, "F");
+  doc.setFontSize(9.5); grey(70);
+  doc.text("Rupees " + inWords(t.sum) + " only.", M + 12, y + 17);
+  y += 44;
+
+  doc.setFontSize(8.5); grey(150);
+  [ "Rates are quoted per unit as indicated and are exclusive of applicable taxes.",
+    "Availability is subject to stock at the time of confirmation.",
+    "This is an estimate, not a tax invoice."
+  ].forEach(line => { doc.text(line, M, y); y += 12; });
+
+  doc.setFontSize(7.5); grey(175);
+  doc.text("Blast Crackers  ·  " + prettyWa(SHOP.wa), M, H - M + 10);
+  return doc;
+}
+
 async function sharePdf(){
   const btn = $("#billpdf");
   if (!btn || btn.disabled) return;
   const label = btn.textContent;
   btn.disabled = true; btn.textContent = "Preparing…";
   try {
-    if (!window.html2canvas)
-      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
     if (!window.jspdf)
       await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
-
-    const paper = document.querySelector(".paper");
-    const shot = await html2canvas(paper, {scale: 2, backgroundColor: "#ffffff", useCORS: true});
-    const pdf = new window.jspdf.jsPDF({unit: "pt", format: "a4"});
-    const pw = pdf.internal.pageSize.getWidth();
-    const ph = pdf.internal.pageSize.getHeight();
-    const pad = 26;
-    const w = pw - pad * 2;
-    const h = Math.min(shot.height * w / shot.width, ph - pad * 2);
-    pdf.addImage(shot.toDataURL("image/jpeg", 0.92), "JPEG", pad, pad, w, h);
-
+    const doc = buildPdf();
     const name = `Blast-Crackers-${billNo()}.pdf`;
-    const blob = pdf.output("blob");
+    const blob = doc.output("blob");
     const file = new File([blob], name, {type: "application/pdf"});
-
     if (navigator.canShare && navigator.canShare({files: [file]})){
       await navigator.share({files: [file], title: "Blast Crackers order"});
     } else {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = name;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      doc.save(name);
       toast("PDF saved — attach it in WhatsApp");
     }
   } catch (err) {
-    toast("Couldn't build the PDF — try Print");
+    if (!/AbortError/.test(String(err))) toast("Couldn't build the PDF — try Print");
   }
   btn.disabled = false; btn.textContent = label;
 }
