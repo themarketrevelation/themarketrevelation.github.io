@@ -266,6 +266,10 @@ body.sheet-open .bar{transform:translateY(120%)}
   text-transform:uppercase;cursor:pointer;text-decoration:none;transition:.18s;white-space:nowrap}
 .btn-wa{background:#1fa855;color:#fff;box-shadow:0 8px 24px rgba(31,168,85,.32)}
 .btn-wa:hover{background:#1b9c4e;transform:translateY(-1px)}
+.btn-pdf{background:rgba(31,168,85,.1);border-color:rgba(31,168,85,.5);color:#12813f}
+.btn-pdf:hover{background:rgba(31,168,85,.18)}
+.btn-pdf[disabled]{opacity:.6}
+.sendnote{margin:-2px 0 2px;text-align:center;font-size:11px;line-height:1.5;color:var(--mute)}
 .btn-ghost{background:var(--glass);border-color:var(--hair);color:var(--ink)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .btn svg{width:17px;height:17px;flex:0 0 auto}
@@ -334,8 +338,13 @@ body.sheet-open .bar{transform:translateY(120%)}
   border-bottom:1px solid var(--hair);font:400 8.5px/1 var(--sans);letter-spacing:.2em;
   color:var(--mute);text-transform:uppercase}
 .bcols span:last-child{text-align:right}
-.bline{display:grid;grid-template-columns:22px 1fr 92px;gap:10px;padding:10px 0;
-  border-bottom:1px solid var(--rule);align-items:baseline}
+.bline{display:grid;grid-template-columns:22px 1fr auto;gap:5px 10px;padding:11px 0;
+  border-bottom:1px solid var(--rule);align-items:center}
+.bline .bno{grid-column:1;grid-row:1}
+.bline .bnm{grid-column:2;grid-row:1}
+.bline .bamt{grid-column:3;grid-row:1}
+.bqty{grid-column:2 / span 2;grid-row:2;justify-self:end}
+.bqty .pq{display:none;font-size:12px;color:var(--mute)}
 .bno{font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums}
 .bnm{font-size:13.5px;color:var(--ink-soft)}
 .bnm em{display:block;margin-top:3px;font-style:normal;font-size:10.5px;letter-spacing:.1em;
@@ -363,6 +372,8 @@ body.sheet-open .bar{transform:translateY(120%)}
   .wrap{max-width:none;padding:0}
   .paper{border:0;box-shadow:none;padding:0;border-radius:0}
   .bwords{background:none;border:1px solid #ddd}
+  .bqty .step{display:none}
+  .bqty .pq{display:inline}
   .btofields input,.btofields textarea{border-bottom:0;padding:2px 0}
   .btofields input::placeholder,.btofields textarea::placeholder{color:transparent}
   .bill{max-width:none}
@@ -697,8 +708,9 @@ function total(){
   $("#dTotal").textContent = money(t.sum);
   $("#barMeta").textContent = `${t.items} item${t.items!==1?"s":""} · ${t.units} qty`;
   syncSend();
-  if (!$("#bill").classList.contains("hide") && !$("#bill").contains(document.activeElement))
-    renderBill();
+  if (!$("#bill").classList.contains("hide")){
+    if (typingIn($("#bill"))) refreshFigures(); else renderBill();
+  } else if (typingIn($("#citems"))) refreshFigures();
   const place = $("#placebtn");
   if (place){
     place.hidden = !any || !$("#bill").classList.contains("hide") || $("#pager").hidden;
@@ -718,7 +730,7 @@ function total(){
 }
 function renderCart(){
   const box = $("#citems");
-  if (box.contains(document.activeElement)) return;   // someone is typing in here
+  if (typingIn(box)) return;   // don't yank a field out from under the cursor
   const ids = Object.keys(cart).sort((a,b)=>a-b);
   box.innerHTML = ids.length ? ids.map(id => {
     const it = ITEMS[id], n = cart[id];
@@ -735,6 +747,38 @@ function renderCart(){
   }).join("") : "";
 }
 
+/* While a quantity is being typed the bill must not be rebuilt — that would
+   pull the field out from under the cursor — so patch the figures in place. */
+function refreshFigures(){
+  const t = totals();
+  document.querySelectorAll("#bill .bline").forEach(line => {
+    const it = ITEMS[line.dataset.id];
+    const n = cart[line.dataset.id] || 0;
+    if (!it) return;
+    const amt = line.querySelector(".bamt");
+    if (amt) amt.textContent = money(it.r * n);
+    const pq = line.querySelector(".pq");
+    if (pq) pq.textContent = "× " + n;
+  });
+  document.querySelectorAll("#citems .citem").forEach(row => {
+    const it = ITEMS[row.dataset.id];
+    const n = cart[row.dataset.id] || 0;
+    const cl = row.querySelector(".cl");
+    if (it && cl) cl.textContent = money(it.r * n);
+  });
+  const cnt = document.querySelector("#bill .bsum .cnt");
+  const grand = document.querySelector("#bill .bsum .grand b");
+  const words = document.querySelector("#bill .bwords");
+  if (cnt) cnt.textContent = `${t.items} item${t.items !== 1 ? "s" : ""} · ${t.units} qty`;
+  if (grand) grand.textContent = money(t.sum);
+  if (words) words.textContent = `Rupees ${inWords(t.sum)} only.`;
+}
+
+/* true only when a text field inside `root` has the cursor */
+function typingIn(root){
+  const el = document.activeElement;
+  return !!el && root.contains(el) && /^(INPUT|TEXTAREA)$/.test(el.tagName);
+}
 function quietQty(id, n){
   n = Math.max(0, Math.min(999, n));
   if (n) cart[id] = n; else delete cart[id];
@@ -757,7 +801,8 @@ document.addEventListener("focusout", e => {
   const host = inp.closest("[data-id]");
   if (!host) return;
   const id = host.dataset.id;
-  setQty(id, qty(id) || 1);
+  /* wait a tick so the cursor has actually left before anything redraws */
+  setTimeout(() => setQty(id, qty(id) || 1), 0);
 });
 document.addEventListener("keydown", e => {
   if (e.key === "Enter" && e.target.closest && e.target.closest(".qin")) e.target.blur();
@@ -997,10 +1042,15 @@ function renderBill(){
       <div class="bcols"><span>#</span><span>Particulars</span><span>Amount</span></div>
       ${ids.map((id, k) => {
         const it = ITEMS[id], n = cart[id];
-        return `<div class="bline">
+        return `<div class="bline" data-id="${id}">
           <span class="bno">${k + 1}</span>
-          <span class="bnm">${esc(it.n)}<em>${esc(it.u)} · ${money(it.r)} × ${n}</em></span>
+          <span class="bnm">${esc(it.n)}<em>${esc(it.u)} · ${money(it.r)} each</em></span>
           <span class="bamt">${money(it.r * n)}</span>
+          <span class="bqty"><span class="pq">× ${n}</span><span class="step">
+            <button data-d="-1" aria-label="Less">−</button>
+            <input class="qin" type="text" inputmode="numeric" pattern="[0-9]*" value="${n}"
+                   aria-label="Quantity">
+            <button data-d="1" aria-label="More">+</button></span></span>
         </div>`;
       }).join("")}
       <div class="bsum">
@@ -1015,20 +1065,76 @@ function renderBill(){
       </p>
     </div>
     <div class="bacts">
-      <a class="btn btn-wa" id="billsend" href="#" rel="noopener">Send on WhatsApp</a>
+      <a class="btn btn-wa" id="billsend" href="#" rel="noopener">Send on WhatsApp — text</a>
+      <button class="btn btn-pdf" id="billpdf">Send as PDF</button>
+      <p class="sendnote">The PDF opens your share sheet — choose WhatsApp.</p>
       <div class="pair">
-        <button class="btn btn-ghost" id="billprint">Print / Save PDF</button>
         <button class="btn btn-ghost" id="billedit">Change quantities</button>
+        <button class="btn btn-ghost" id="billcopy">Copy text</button>
       </div>
-      <button class="btn btn-ghost" id="billcopy">Copy order text</button>
+      <button class="btn btn-ghost" id="billprint">Print</button>
     </div>`;
   [["bname","cname"],["bphone","cphone"],["baddr","caddr"],["bnote","cnote"]]
     .forEach(([id, key]) => bindDetail($("#" + id), key));
   syncSend();
   $("#billsend").addEventListener("click", guardSend);
   $("#billprint").onclick = () => window.print();
+  $("#billpdf").onclick = sharePdf;
   $("#billcopy").onclick = () => $("#copy").click();
   $("#billedit").onclick = () => openCart();
+}
+
+/* ---------- share the bill as a PDF ----------
+   A wa.me link can only carry text, so a file has to go through the share
+   sheet. Where that isn't available the PDF is saved instead. */
+const scripts = {};
+function loadScript(src){
+  if (scripts[src]) return scripts[src];
+  return scripts[src] = new Promise((ok, fail) => {
+    const el = document.createElement("script");
+    el.src = src; el.onload = ok; el.onerror = () => fail(new Error(src));
+    document.head.appendChild(el);
+  });
+}
+async function sharePdf(){
+  const btn = $("#billpdf");
+  if (!btn || btn.disabled) return;
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = "Preparing…";
+  try {
+    if (!window.html2canvas)
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+    if (!window.jspdf)
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+
+    const paper = document.querySelector(".paper");
+    const shot = await html2canvas(paper, {scale: 2, backgroundColor: "#ffffff", useCORS: true});
+    const pdf = new window.jspdf.jsPDF({unit: "pt", format: "a4"});
+    const pw = pdf.internal.pageSize.getWidth();
+    const ph = pdf.internal.pageSize.getHeight();
+    const pad = 26;
+    const w = pw - pad * 2;
+    const h = Math.min(shot.height * w / shot.width, ph - pad * 2);
+    pdf.addImage(shot.toDataURL("image/jpeg", 0.92), "JPEG", pad, pad, w, h);
+
+    const name = `Blast-Crackers-${billNo()}.pdf`;
+    const blob = pdf.output("blob");
+    const file = new File([blob], name, {type: "application/pdf"});
+
+    if (navigator.canShare && navigator.canShare({files: [file]})){
+      await navigator.share({files: [file], title: "Blast Crackers order"});
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast("PDF saved — attach it in WhatsApp");
+    }
+  } catch (err) {
+    toast("Couldn't build the PDF — try Print");
+  }
+  btn.disabled = false; btn.textContent = label;
 }
 
 /* ---------- WhatsApp ---------- */
