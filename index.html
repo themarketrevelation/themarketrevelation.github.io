@@ -175,11 +175,11 @@ html.js .qty{display:none}            /* the cart takes over when scripting runs
 .nojs .or{margin:14px 0 0;padding:13px 0 0;border-top:1px solid var(--gold-pale);font-size:14.5px}
 .nojs{margin-top:18px}
 main{padding:34px 0 130px}
-.ghead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
-  margin:0 0 16px;padding:0 0 11px;border-bottom:1px solid var(--hair)}
+.ghead{display:flex;align-items:baseline;justify-content:space-between;gap:6px 14px;
+  flex-wrap:wrap;margin:0 0 16px;padding:0 0 11px;border-bottom:1px solid var(--hair)}
 .ghead h2{margin:0;font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
 .ghead span{font-size:10.5px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-content:start}
 .tile{position:relative;display:flex;flex-direction:column;gap:10px;padding:16px 15px 15px;
   border-radius:15px;background:var(--glass);border:1px solid var(--glass-line);
   box-shadow:var(--shadow);text-decoration:none;color:inherit;
@@ -187,7 +187,8 @@ main{padding:34px 0 130px}
 .tile:hover{transform:translateY(-2px);border-color:var(--gold-pale);
   box-shadow:0 14px 34px rgba(24,24,27,.1)}
 .tile:active{transform:translateY(0)}
-.tname{font:500 11.5px/1.35 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.tname{min-height:2.7em;font:500 11.5px/1.35 var(--sans);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink)}
 .tmeta{margin-top:auto;font-size:10.5px;letter-spacing:.1em;color:var(--mute);text-transform:uppercase}
 .tmeta b{font-weight:500;color:var(--gold)}
 .tbadge{position:absolute;top:11px;right:11px;min-width:20px;height:20px;padding:0 6px;
@@ -435,10 +436,15 @@ footer .fine{margin:20px 0 0;font-size:9.5px;letter-spacing:.2em;color:rgba(214,
 
   /* menu */
   .grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .tile{padding:14px 13px 13px;gap:9px;border-radius:14px}
-  .tname{font-size:11px;letter-spacing:.1em}
-  .tmeta{font-size:10px}
-  .ghead{margin-bottom:13px}
+  .tile{padding:14px 12px 12px;gap:8px;border-radius:14px}
+  .tname{min-height:2.6em;font-size:11px;letter-spacing:.1em}
+  .tmeta{font-size:10px;letter-spacing:.08em}
+  .ghead{flex-direction:column;align-items:flex-start;gap:3px;
+    margin-bottom:12px;padding-bottom:9px}
+  .ghead span{font-size:10px}
+  .hero{padding:28px 0 34px}
+  .lede{margin-top:16px;font-size:14px}
+  .hint{margin-top:12px}
   .crumb{margin-bottom:13px;padding:10px 16px 10px 13px}
   .paper{padding:18px 15px 17px;border-radius:14px}
   .bhead{gap:11px;padding-bottom:14px}
